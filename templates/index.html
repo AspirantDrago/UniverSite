@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">
+        Новости
+    </h1>
+    {% for news_el in news %}
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ news_el['image'] }}" class="img-fluid rounded-start" alt="{{ news_el['title'] }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ news_el['title'] }}
+                        </h5>
+                        <p class="card-text">
+                            {{ news_el['text'] }}
+                        </p>
+{#                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
