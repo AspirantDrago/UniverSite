@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">
+        Профиль
+    </h1>
+    <div class="row">
+        <strong>Имя:</strong> {{ user.name }}
+    </div>
+    <div class="row">
+        <strong>О себе:</strong>
+        <p>{{ user.about }}</p>
+    </div>
+    <div class="row">
+        <strong>E-mail:</strong> <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+    </div>
+    <div class="row">
+        <strong>Дата регистрации:</strong> {{ user.created }}
+    </div>
+    <div class="row">
+        <div class="btn-toolbar justify-content-center" role="toolbar">
+            <div class="btn-group me-2" role="group">
+                <a href="/editprofile" type="button" class="btn btn-primary">Изменить профиль</a>
+                <a href="/changepassword" type="button" class="btn btn-secondary">Изменить пароль</a>
+            </div>
+            <div class="btn-group me-2" role="group">
+                <a href="/logout" type="button" class="btn btn-danger">Выйти</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

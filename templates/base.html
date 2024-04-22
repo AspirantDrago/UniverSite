@@ -19,6 +19,21 @@
             </svg>
             Наш сайт
         </a>
+        <div>
+            {% if not current_user.is_authenticated %}
+                <a href="/login" class="navbar-text">
+                    Войти
+                </a>
+                <span> | </span>
+                <a href="/register" class="navbar-text">
+                    Регистрация
+                </a>
+            {% else %}
+                <a href="/logout" class="navbar-text">
+                    Выйти
+                </a>
+            {% endif %}
+        </div>
     </div>
 </nav>
 

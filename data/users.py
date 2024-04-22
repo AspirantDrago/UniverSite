@@ -3,11 +3,12 @@ from datetime import datetime
 import sqlalchemy as sa
 from sqlalchemy import orm
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login.mixins import UserMixin
 
 from .db_session import SqlAlchemyBase
 
 
-class User(SqlAlchemyBase):
+class User(SqlAlchemyBase, UserMixin):
     __tablename__ = 'users'
 
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
