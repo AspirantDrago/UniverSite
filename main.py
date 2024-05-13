@@ -6,6 +6,7 @@ from forms.form_login import FormLogin, FormRegister, FormChangePassword
 from data import db_session
 from data.users import User
 from data.news import News
+from admin import init_admin
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my_secret_phrase'
@@ -97,4 +98,6 @@ def register():
 
 if __name__ == '__main__':
     db_session.global_init('db/db.db')
+    db_sess = db_session.create_session()
+    init_admin(app, db_sess)
     app.run(host=config.HOST, port=config.PORT, debug=config.DEBUG)
