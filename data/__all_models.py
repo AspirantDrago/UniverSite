@@ -2,3 +2,8 @@ from . import users
 from . import news
 from . import specialties
 from . import departments
+from . import disciplines
+from . import cathedras
+from . import teachers
+from . import classrooms
+from . import lession_types

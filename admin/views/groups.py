@@ -2,6 +2,8 @@ from sqlalchemy.orm import Session
 
 from ._default_view import DefaultView
 from data.groups import Group
+from wtforms import IntegerField
+from wtforms.validators import NumberRange
 
 
 class GroupsView(DefaultView):
@@ -17,3 +19,6 @@ class GroupsView(DefaultView):
         'course': 'Курс',
         'speciality': 'Специальность'
     }
+    form_args = dict(
+        course=dict(label='Курс', validators=[NumberRange(min=1, max=6)])
+    )
