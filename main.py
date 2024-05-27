@@ -1,4 +1,7 @@
-from flask import Flask, render_template, redirect
+from collections import defaultdict
+from datetime import datetime
+
+from flask import Flask, render_template, redirect, abort
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 from config import config
@@ -6,6 +9,9 @@ from forms.form_login import FormLogin, FormRegister, FormChangePassword
 from data import db_session
 from data.users import User
 from data.news import News
+from data.departments import Department
+from data.groups import Group
+from data.specialties import Specialties
 from admin import init_admin
 
 app = Flask(__name__)
@@ -23,8 +29,61 @@ def load_user(user_id: int) -> User:
 @app.route('/')
 def index():
     db_sess = db_session.create_session()
+    departments = db_sess.query(Department).all()
+    return render_template('index.html', departments=departments)
+
+
+@app.route('/dep/<int:department_id>')
+def department(department_id: int):
+    db_sess = db_session.create_session()
+    department = db_sess.get(Department, department_id)
+    if department is None:
+        return abort(404)
+    specialties = db_sess.query(Specialties).filter(Specialties.department_id == department_id).all()
+    return render_template('department.html', department=department, specialties=specialties)
+
+
+@app.route('/spec/<int:specialty_id>')
+def specialty(specialty_id: int):
+    db_sess = db_session.create_session()
+    specialty = db_sess.get(Specialties, specialty_id)
+    if specialty is None:
+        return abort(404)
+    groups = db_sess.query(Group).filter(Group.speciality_id == specialty_id).all()
+    groups_dict = defaultdict(list)
+    for group in groups:
+        groups_dict[group.course].append(group)
+    return render_template('speciality.html', specialty=specialty, groups_dict=groups_dict)
+
+
+@app.route('/group/<int:group_id>')
+@app.route('/group/<int:group_id>/<date>')
+def group(group_id: int, date: str = None):
+    db_sess = db_session.create_session()
+    group = db_sess.get(Group, group_id)
+    if group is None:
+        return abort(404)
+    is_current_day = date is None
+    if date is not None:
+        try:
+            current_day = datetime.strptime(date, '%Y-%m-%d').date()
+        except:
+            abort(400)
+    else:
+        current_day = datetime.today()
+    return render_template(
+        'group.html',
+        group=group,
+        is_current_day=is_current_day,
+        current_day=current_day
+    )
+
+
+@app.route('/news')
+def news():
+    db_sess = db_session.create_session()
     news = db_sess.query(News).all()
-    return render_template('index.html', news=news)
+    return render_template('news.html', news=news)
 
 
 @login_required

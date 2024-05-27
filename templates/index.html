@@ -2,26 +2,13 @@
 
 {% block content %}
     <h1 class="text-center">
-        Новости
+        Расписание
     </h1>
-    {% for news_el in news %}
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ news_el['image'] }}" class="img-fluid rounded-start" alt="{{ news_el['title'] }}">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {{ news_el['title'] }}
-                        </h5>
-                        <p class="card-text">
-                            {{ news_el['text'] }}
-                        </p>
-{#                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>#}
-                    </div>
-                </div>
+    <div class="row">
+        {% for department in departments %}
+            <div class="col-12 col-md-6 mb-1">
+                <a href="/dep/{{ department.id }}" class="btn btn-secondary btn-lg w-100 h-100">{{ department.name }}</a>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -5,7 +5,7 @@ PRODUCTION_PORT = 80
 DEBUG_PORT = 8080
 
 # DEBUG = os.path.isfile('config/.debug')
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
     PORT = DEBUG_PORT

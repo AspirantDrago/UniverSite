@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">
+        Расписание
+    </h1>
+    <h2 class="text-center">
+        {{ group.name }}
+    </h2>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Расписание</a></li>
+            <li class="breadcrumb-item"><a href="/dep/{{ group.speciality.department.id }}">{{ group.speciality.department.shortname }}</a></li>
+            <li class="breadcrumb-item"><a href="/spec/{{ group.speciality.id }}">{{ group.speciality.shortname }}</a></li>
+            {% if is_current_day %}
+                <li class="breadcrumb-item active" aria-current="page">{{ group.name }}</li>
+            {% else %}
+                <li class="breadcrumb-item" aria-current="page"><a href="/group/{{ group.id }}">{{ group.name }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ current_day }}</li>
+            {% endif %}
+        </ol>
+    </nav>
+
+    <div class="row">
+        {#        {% if not groups_dict %}#}
+        {#            <div class="alert alert-warning" role="alert">#}
+        {#                <p class="text-center">#}
+        {#                    Групп пока нет#}
+        {#                </p>#}
+        {#            </div>#}
+        {#        {% else %}#}
+        {#            <table class="table table-striped">#}
+        {#                <thead>#}
+        {#                    <tr>#}
+        {#                        <th scope="col">Курс</th>#}
+        {#                        <th scope="col">Группы</th>#}
+        {#                    </tr>#}
+        {#                </thead>#}
+        {#                <tbody>#}
+        {#                {% for course in groups_dict.keys() | sort %}#}
+        {#                    <tr>#}
+        {#                        <th scope="row">{{ course }}</th>#}
+        {#                        <td>#}
+        {#                            {% for group in groups_dict[course] %}#}
+        {#                                <a href="/group/{{ group.id }}" class="btn btn-secondary">#}
+        {#                                    {{ group.name }}#}
+        {#                                </a>#}
+        {#                            {% endfor %}#}
+        {#                        </td>#}
+        {#                    </tr>#}
+        {#                {% endfor %}#}
+        {#                </tbody>#}
+        {#            </table>#}
+        {#        {% endif %}#}
+    </div>
+{% endblock %}

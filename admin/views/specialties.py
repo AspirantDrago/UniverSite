@@ -15,5 +15,6 @@ class SpecialtiesView(DefaultView):
     column_labels = {
         'name': 'Наименование',
         'shortname': 'Краткое наименование',
-        'department': 'Подразделение'
+        'department': 'Подразделение',
+        'groups': 'Группы'
     }

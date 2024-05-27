@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-center">
+        Расписание
+    </h1>
+    <h2 class="text-center">
+        {{ department.name }}
+    </h2>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Расписание</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ department.shortname }}</li>
+      </ol>
+    </nav>
+
+    <div class="row">
+        {% for specialty in specialties %}
+            <div class="col-12 col-md-6 mb-1">
+                <a href="/spec/{{ specialty.id }}" class="btn btn-secondary btn-lg w-100 h-100">{{ specialty.name }}</a>
+            </div>
+        {% endfor %}
+        {% if not specialties %}
+            <div class="alert alert-warning" role="alert">
+                <p class="text-center">
+                    Направлений обучения пока нет
+                </p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
