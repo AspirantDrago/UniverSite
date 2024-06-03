@@ -7,3 +7,5 @@ from . import cathedras
 from . import teachers
 from . import classrooms
 from . import lession_types
+from . import lession
+from . import schedules

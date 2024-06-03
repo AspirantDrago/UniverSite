@@ -14,6 +14,8 @@ from .views.cathedras import CathedrasView
 from .views.teachers import TeachersView
 from .views.classrooms import ClassroomsView
 from .views.lession_types import LessionTypesView
+from .views.lessions import LessionView
+from .views.schedules import ScheduleView
 
 
 def init_admin(app: Flask, db_session: Session) -> None:
@@ -31,5 +33,7 @@ def init_admin(app: Flask, db_session: Session) -> None:
     admin.add_view(TeachersView(db_session))
     admin.add_view(ClassroomsView(db_session))
     admin.add_view(LessionTypesView(db_session))
+    admin.add_view(LessionView(db_session))
+    admin.add_view(ScheduleView(db_session))
 
     babel = Babel(app, )

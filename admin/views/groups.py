@@ -19,6 +19,7 @@ class GroupsView(DefaultView):
         'course': 'Курс',
         'speciality': 'Специальность'
     }
+    form_excluded_columns = ['lessions']
     form_args = dict(
         course=dict(label='Курс', validators=[NumberRange(min=1, max=6)])
     )

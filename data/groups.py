@@ -13,6 +13,7 @@ class Group(SqlAlchemyBase):
     speciality_id = sa.Column(sa.Integer, sa.ForeignKey('specialties.id'))
 
     speciality = orm.relationship('Specialties', backref='groups')
+    lessions = orm.relationship('Lession', secondary='group_lession')
 
     def __str__(self):
         return self.name

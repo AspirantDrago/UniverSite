@@ -15,6 +15,7 @@ class Teacher(SqlAlchemyBase):
     academic_degree = sa.Column(sa.String, nullable=True)
 
     cathedras = orm.relationship('Cathedra', back_populates='teachers', secondary='teachers_cathedra')
+    lessions = orm.relationship('Lession')
 
     def __str__(self):
         if self.patronymic:
